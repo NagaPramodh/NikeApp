@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    position: "absolute",
+    position: "fixed",
     backgroundColor: "black",
     bottom: 30,
     width: "90%",

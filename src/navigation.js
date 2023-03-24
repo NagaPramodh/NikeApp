@@ -27,7 +27,7 @@ const Navigation = () => {
             headerRight: () => (
               <Pressable
                 onPress={() => navigation.navigate("Cart")}
-                style={{ flexDirection: "row" }}
+                style={{ flexDirection: "row", marginRight: 10 }}
               >
                 <FontAwesome5 name="shopping-cart" size={18} color="gray" />
                 <Text style={{ marginLeft: 5, fontWeight: "500" }}>
@@ -35,14 +35,14 @@ const Navigation = () => {
                 </Text>
               </Pressable>
             ),
-            headerLeft: () => (
-              <MaterialCommunityIcons
-                onPress={() => navigation.navigate("Track Order")}
-                name="truck-delivery"
-                size={22}
-                color="gray"
-              />
-            ),
+            // headerLeft: () => (
+            //   <MaterialCommunityIcons
+            //     onPress={() => navigation.navigate("Track Order")}
+            //     name="truck-delivery"
+            //     size={22}
+            //     color="gray"
+            //   />
+            // ),
           })}
         />
         <Stack.Screen

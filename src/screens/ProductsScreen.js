@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { productsSlice } from "../store/productsSlice";
+import productsSlice from "../store/productsSlice";
 import { useState } from "react";
 import { SearchBar } from "react-native-elements";
 
@@ -26,16 +26,15 @@ const ProductsScreen = ({ navigation }) => {
   let sortedProducts = products
     .slice()
     .sort((p1, p2) => (p1.fullname < p2.name ? 1 : p1.name > p2.name ? -1 : 0));
-  const dataAsc = sortedProducts
+  const dataAsc = sortedProducts.map((item) => {
+    return item;
+  });
+  const dataDsc = sortedProducts
     .slice()
     .reverse()
     .map((item) => {
       return item;
     });
-  const dataDsc = sortedProducts.map((item) => {
-    return item;
-  });
-  console.log(dataAsc, dataDsc);
 
   const data = products.filter((item) => {
     const searchTerm = text;
@@ -49,7 +48,7 @@ const ProductsScreen = ({ navigation }) => {
         placeholder="Search Shoes..."
         onChangeText={changeHandler}
         value={text}
-        style={{ backgroundColor: "white" }}
+        style={{ backgroundColor: "white", paddingLeft: 10 }}
       />
       <View style={styles.buttonContainer}>
         <Pressable
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     width: "50%",
     padding: 1,
-    borderRadius: 100,
+    borderRadius: 500,
   },
   image: {
     width: "100%",
@@ -117,16 +116,19 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
+    gap: 10,
     marginTop: 10,
+    marginBottom: 10,
   },
   button: {
     position: "initial",
     backgroundColor: "black",
     bottom: 30,
-    width: "33%",
+    width: "30%",
     alignSelf: "center",
     padding: 20,
-    borderRadius: 100,
+    borderRadius: 500,
+    borderWidth: "4",
     alignItems: "center",
   },
   buttonText: {
