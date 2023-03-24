@@ -1,52 +1,59 @@
-import {
-  FlatList,
-  Text,
-  View,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import { Text, FlatList, View, StyleSheet, Pressable } from "react-native";
 import CartListItem from "../components/CartListItem";
-import cart from "../data/cart";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectDeliveryPrice,
+  selectSubtotal,
+  selectTotal,
+} from "../store/cartSlice";
 
 const ShoppingCartTotals = () => {
+  const subtotal = useSelector(selectSubtotal);
+  const deliveryFee = useSelector(selectDeliveryPrice);
+  const total = useSelector(selectTotal);
+
   return (
-    <View style={styles.totalContainer}>
+    <View style={styles.totalsContainer}>
       <View style={styles.row}>
-        <Text style={styles.text}>SubTotal</Text>
-        <Text style={styles.text}>Rs.100</Text>
+        <Text style={styles.text}>Subtotal</Text>
+        <Text style={styles.text}>{subtotal} US$</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.text}>Delivery</Text>
-        <Text style={styles.text}>Rs.10</Text>
+        <Text style={styles.text}>{deliveryFee} US$</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.textBold}>Total</Text>
-        <Text style={styles.textBold}>Rs.110</Text>
+        <Text style={styles.textBold}>{total} US$</Text>
       </View>
     </View>
   );
 };
+
 const ShoppingCart = () => {
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector((state) => state.cart.items);
+
   return (
     <>
       <FlatList
-        data={cart}
+        data={cartItems}
         renderItem={({ item }) => <CartListItem cartItem={item} />}
         ListFooterComponent={ShoppingCartTotals}
       />
       <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>Proceed to checkout</Text>
+        <Text style={styles.buttonText}>Checkout</Text>
       </Pressable>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  totalContainer: {
+  totalsContainer: {
     margin: 20,
     paddingTop: 10,
-    borderColor: "gainboro",
+    borderColor: "gainsboro",
     borderTopWidth: 1,
   },
   row: {
@@ -62,16 +69,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
   },
+
   button: {
-    backgroundColor: "black",
     position: "absolute",
+    backgroundColor: "black",
     bottom: 30,
     width: "90%",
     alignSelf: "center",
     padding: 20,
     borderRadius: 100,
     alignItems: "center",
-    // marginTop: 20,
   },
   buttonText: {
     color: "white",
@@ -79,4 +86,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
 export default ShoppingCart;
