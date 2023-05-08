@@ -9,6 +9,8 @@ import { Pressable, Text } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import { selectNumberOfItems } from "./store/cartSlice";
+import FetchData from "./fetch-data";
+import AddData from "./send-data";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,8 @@ const Navigation = () => {
         <Stack.Screen
           name="Products"
           component={ProductsScreen}
+          // component={FetchData}
+          // component={AddData}
           options={({ navigation }) => ({
             headerRight: () => (
               <Pressable
